@@ -30,7 +30,7 @@ public class Panel extends JPanel implements ActionListener {
         final int cannonSize = 80;
 
         g.setColor(cannonColor);
-        g.fillRect(cannonX, (int) (game.cannon.getPos() * panelSize.height - cannonSize / 2), cannonSize, cannonSize);
+        g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
     }
 
     @Override
