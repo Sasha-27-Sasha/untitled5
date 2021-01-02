@@ -4,13 +4,16 @@ import java.awt.event.*;
 
 public class Panel extends JPanel implements ActionListener {
 
-    private static final int timerDelay = 10;
+    private static final int timerDelay = 16;
+    private final Game game;
 
-    Cannon cannon = new Cannon();
-
-    public Panel() {
+    public Panel(Game game) {
+        this.game = game;
+        addKeyListener(new KeyListener(game));
+        setFocusable(true);
         Timer timer = new Timer(timerDelay, this);
         timer.start();
+        //TODO: window decoration
     }
 
     public void paintComponent(Graphics graphics) {
@@ -27,7 +30,7 @@ public class Panel extends JPanel implements ActionListener {
         final int cannonSize = 80;
 
         g.setColor(cannonColor);
-        g.fillRect(cannonX, (int) (cannon.getPos() * panelSize.height - cannonSize / 2), cannonSize, cannonSize);
+        g.fillRect(cannonX, (int) (game.cannon.getPos() * panelSize.height - cannonSize / 2), cannonSize, cannonSize);
     }
 
     @Override
