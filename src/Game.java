@@ -38,8 +38,4 @@ public class Game {
         }
         return false;
     }
-
-    private double distance(Bullet bullet, Enemy enemy) {
-        return sqrt((bullet.getX() - enemy.getX()) * (bullet.getX() - enemy.getX()) + (bullet.getY() - enemy.getY()) * (bullet.getY() - enemy.getY()));
-    }
 }
