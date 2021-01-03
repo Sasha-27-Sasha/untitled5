@@ -1,7 +1,7 @@
 public class Bullet {
-    double x;
-    double y;//TODO: getters
-    int type;
+    private double x;
+    private final double y;
+    private final int type;
 
     private static final double speed = 0.025;
 
@@ -14,5 +14,17 @@ public class Bullet {
     public boolean move() {
         x += speed; //TODO: remove fps correlation
         return x < 1.1;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getType() {
+        return type;
     }
 }

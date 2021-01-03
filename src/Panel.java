@@ -42,8 +42,8 @@ public class Panel extends JPanel implements ActionListener {
 
         //Bullets
         for (Bullet bullet : game.bullets) {
-            g.setColor(typeToColors[bullet.type]);
-            g.fillOval((int) (bullet.x * panelSize.width) + cannonX, (int) (bullet.y * (panelSize.height - bulletSize)), bulletSize, bulletSize);
+            g.setColor(typeToColors[bullet.getType()]);
+            g.fillOval((int) (bullet.getX() * panelSize.width) + cannonX, (int) (bullet.getY() * (panelSize.height - bulletSize)), bulletSize, bulletSize);
         }
 
         //Cannon

@@ -20,6 +20,7 @@ public class Game {
         for (Enemy enemy : enemies)
             enemy.move();
         //TODO: collision
+        //TODO: speedup
         cannon.update();
         bullets.removeIf(bullet -> !bullet.move());
     }
