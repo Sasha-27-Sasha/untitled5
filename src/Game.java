@@ -1,5 +1,5 @@
-import java.awt.geom.Point2D;
 import java.util.LinkedList;
+import static java.lang.Math.sqrt;
 
 public class Game {
 
@@ -19,13 +19,27 @@ public class Game {
         }
         for (Enemy enemy : enemies)
             enemy.move();
-        //TODO: collision
         //TODO: speedup
         cannon.update();
+        bullets.removeIf(this::collisionCheck);
         bullets.removeIf(bullet -> !bullet.move());
     }
 
     public void run() {
         Frame frame = new Frame(this);
+    }
+
+    private boolean collisionCheck(Bullet bullet) {
+        for (Enemy enemy : enemies) {
+            if (enemy.screenPos.intersects(bullet.screenPos)) {
+                enemies.remove(enemy);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private double distance(Bullet bullet, Enemy enemy) {
+        return sqrt((bullet.getX() - enemy.getX()) * (bullet.getX() - enemy.getX()) + (bullet.getY() - enemy.getY()) * (bullet.getY() - enemy.getY()));
     }
 }
