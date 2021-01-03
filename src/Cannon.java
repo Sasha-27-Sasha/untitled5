@@ -4,6 +4,7 @@ import static java.lang.Math.*;
 public class Cannon {
 
     private double y = 0.5;
+    private static final double speed = 0.01;
     private final int reloadTime = 10;
     private int reload = reloadTime;
 
@@ -18,8 +19,8 @@ public class Cannon {
                 y = 0.5 - direction / 2.0;
             return;
         }
-        double v = 0.01;
-        y -= v * direction; //TODO: remove fps correlation
+
+        y -= speed * direction; //TODO: remove fps correlation
         y = max(0.0, min(y, 1.0));
     }
 
