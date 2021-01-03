@@ -1,6 +1,6 @@
 public class Bullet {
     double x;
-    double y;
+    double y;//TODO: getters
     int type;
 
     private static final double speed = 0.025;

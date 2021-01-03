@@ -24,17 +24,25 @@ public class Panel extends JPanel implements ActionListener {
         Graphics2D g = (Graphics2D) graphics;
         Rectangle panelSize = g.getClip().getBounds();
 
+        Color[] typeToColors = {Color.RED, Color.GREEN, Color.BLUE}; //TODO: remove count correlation
         //Cannon
         Color cannonColor = Color.GREEN;
         final int cannonX = 10;
         final int cannonSize = 80;
         //Bullets
         final int bulletSize = 60;
-        Color[] bulletColors = {Color.RED, Color.GREEN, Color.BLUE}; //TODO: remove count correlation
+        //Enemy
+        final int enemySize = 60;
+
+        //Enemy
+        for (Enemy enemy : game.enemies) {
+            g.setColor(typeToColors[enemy.getType()]);
+            g.fillRoundRect((int) (enemy.getX() * panelSize.width + enemySize) + enemySize, (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize, 10, 10);
+        }
 
         //Bullets
         for (Bullet bullet : game.bullets) {
-            g.setColor(bulletColors[bullet.type]);
+            g.setColor(typeToColors[bullet.type]);
             g.fillOval((int) (bullet.x * panelSize.width) + cannonX, (int) (bullet.y * (panelSize.height - bulletSize)), bulletSize, bulletSize);
         }
 

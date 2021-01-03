@@ -1,14 +1,16 @@
 import java.util.Random;
 
 public class Enemy {
-    private double y = 1;
-    private final double x;
-    private double speed = 0.01;
+    private double x = 1;
+    private final double y;
+    private final int type;
+    private double speed = 0.003;
     private static final double acceleration = 0.001;
     private static final Random rnd = new Random();
 
     public Enemy() {
-        x = rnd.nextDouble();
+        y = rnd.nextDouble();
+        type = rnd.nextInt(3);
     }
 
     public void speedUp() {
@@ -16,8 +18,12 @@ public class Enemy {
     }
 
     public boolean move() {
-        y -= speed;//TODO: remove fps correlation
+        x -= speed;//TODO: remove fps correlation
         return true; //TODO: disapear
+    }
+
+    public int getType() {
+        return type;
     }
 
     public double getX() {

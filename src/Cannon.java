@@ -4,7 +4,7 @@ import static java.lang.Math.*;
 public class Cannon {
 
     private double y = 0.5;
-    private static final double speed = 0.01;
+    private static final double speed = 0.015;
     private final int reloadTime = 10;
     private int reload = reloadTime;
 

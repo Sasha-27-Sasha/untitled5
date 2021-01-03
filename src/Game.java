@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Game {
 
-    private static final int enemyRate = 10;
+    private static final int enemyRate = 70;
     private int enemyReload = enemyRate;
 
     Cannon cannon = new Cannon();
@@ -15,6 +15,7 @@ public class Game {
             enemyReload++;
         else {
             enemies.add(new Enemy());
+            enemyReload = 0;
         }
         for (Enemy enemy : enemies)
             enemy.move();
