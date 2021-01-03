@@ -27,6 +27,7 @@ public class KeyListener extends KeyAdapter {
         if (key == KeyEvent.VK_W) {
             game.cannon.up = true;
             W = true;
+            game.cannon.shoot(game.bullets, 0);
         }
 
         if (key == KeyEvent.VK_S) {

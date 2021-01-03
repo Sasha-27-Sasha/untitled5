@@ -3,7 +3,7 @@ public class Bullet {
     double y;
     int type;
 
-    private static final double v = 0.05;
+    private static final double v = 0.01;
 
     public Bullet(double x, double y, int type) {
         this.x = x;
@@ -11,8 +11,9 @@ public class Bullet {
         this.type = type;
     }
 
-    public void move() {
-        y += v; //TODO: remove fps correlation
-        //TODO:disapear
+    public boolean move() {
+        x += v; //TODO: remove fps correlation
+        //TODO: disapear
+        return true;
     }
 }

@@ -34,7 +34,11 @@ public class Panel extends JPanel implements ActionListener {
 
         //Bullets
         final int bulletSize = 80;
-        //TODO: draw bullets
+        //TODO: bullets color
+
+        for (Bullet bullet : game.bullets) {
+            g.fillOval((int) (bullet.x * panelSize.width), (int) (bullet.y * panelSize.height), bulletSize, bulletSize);
+        }
     }
 
     @Override

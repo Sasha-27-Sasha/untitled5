@@ -8,6 +8,7 @@ public class Game {
 
     public void update() {
         cannon.update();
+        bullets.removeIf(bullet -> !bullet.move());
     }
 
     public void run() {
