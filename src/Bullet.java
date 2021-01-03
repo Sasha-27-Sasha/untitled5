@@ -14,6 +14,6 @@ public class Bullet {
     public boolean move() {
         x += v; //TODO: remove fps correlation
         //TODO: disapear
-        return true;
+        return x < 1.1;
     }
 }

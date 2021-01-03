@@ -14,20 +14,25 @@ public class KeyListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
 
-        if (W && S)
-            return;
-
         int key = e.getKeyCode();
 
-        //TODO: shoot
+
+        if (key == KeyEvent.VK_8)
+            game.cannon.shoot(game.bullets, 0);
+        if (key == KeyEvent.VK_9)
+            game.cannon.shoot(game.bullets, 1);
+        if (key == KeyEvent.VK_0)
+            game.cannon.shoot(game.bullets, 2);
 
         if (key == KeyEvent.VK_SHIFT)
             game.cannon.jump = true;
 
+        if (W && S)
+            return;
+
         if (key == KeyEvent.VK_W) {
             game.cannon.up = true;
             W = true;
-            game.cannon.shoot(game.bullets, 0);
         }
 
         if (key == KeyEvent.VK_S) {
