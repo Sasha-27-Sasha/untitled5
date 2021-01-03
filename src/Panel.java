@@ -37,7 +37,7 @@ public class Panel extends JPanel implements ActionListener {
         //Enemy
         for (Enemy enemy : game.enemies) {
             g.setColor(typeToColors[enemy.getType()]);
-            enemy.screenPos = new Rectangle((int) (enemy.getX() * panelSize.width + enemySize) + enemySize, (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize);
+            enemy.screenPos = new Rectangle((int) (enemy.getX() * (panelSize.width + enemySize)), (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize);
             g.fillRoundRect(enemy.screenPos.x, enemy.screenPos.y, enemy.screenPos.width, enemy.screenPos.height, 10, 10);
         }
 

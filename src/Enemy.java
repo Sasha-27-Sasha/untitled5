@@ -22,7 +22,7 @@ public class Enemy {
 
     public boolean move() {
         x -= speed;//TODO: remove fps correlation
-        return true; //TODO: disapear
+        return x > 0;
     }
 
     public int getType() {
