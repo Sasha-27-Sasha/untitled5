@@ -31,11 +31,15 @@ public class Panel extends JPanel implements ActionListener {
 
         g.setColor(cannonColor);
         g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
+
+        //Bullets
+        final int bulletSize = 80;
+        //TODO: draw bullets
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        game.update();
         repaint();
     }
 }
