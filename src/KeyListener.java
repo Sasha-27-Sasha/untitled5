@@ -3,8 +3,8 @@ import java.awt.event.*;
 public class KeyListener extends KeyAdapter {
 
     private final Game game;
-    boolean W = false;
-    boolean S = false;
+    boolean W = false, S = false;
+    boolean[] shoot = {false, false, false}; //TODO: remove count correlation
 
     public KeyListener(Game game) {
         this.game = game;
@@ -16,13 +16,9 @@ public class KeyListener extends KeyAdapter {
 
         int key = e.getKeyCode();
 
-
-        if (key == KeyEvent.VK_8)
-            game.cannon.shoot(game.bullets, 0);
-        if (key == KeyEvent.VK_9)
-            game.cannon.shoot(game.bullets, 1);
-        if (key == KeyEvent.VK_0)
-            game.cannon.shoot(game.bullets, 2);
+        if (KeyEvent.VK_7 <= key && key <= KeyEvent.VK_9) {
+            game.cannon.shoot(game.bullets, key - KeyEvent.VK_7);
+        }
 
         if (key == KeyEvent.VK_SHIFT)
             game.cannon.jump = true;

@@ -30,7 +30,7 @@ public class Panel extends JPanel implements ActionListener {
         final int cannonSize = 80;
         //Bullets
         final int bulletSize = 60;
-        Color[] bulletColors = {Color.RED, Color.GREEN, Color.BLUE};
+        Color[] bulletColors = {Color.RED, Color.GREEN, Color.BLUE}; //TODO: remove count correlation
 
         //Bullets
         for (Bullet bullet : game.bullets) {
