@@ -28,17 +28,19 @@ public class Panel extends JPanel implements ActionListener {
         Color cannonColor = Color.GREEN;
         final int cannonX = 10;
         final int cannonSize = 80;
-
-        g.setColor(cannonColor);
-        g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
-
         //Bullets
         final int bulletSize = 60;
-        //TODO: bullets color
+        Color[] bulletColors = {Color.RED, Color.GREEN, Color.BLUE};
 
+        //Bullets
         for (Bullet bullet : game.bullets) {
-            g.fillOval((int) (bullet.x * panelSize.width), (int) (bullet.y * (panelSize.height - bulletSize)), bulletSize, bulletSize);
+            g.setColor(bulletColors[bullet.type]);
+            g.fillOval((int) (bullet.x * panelSize.width) + cannonX, (int) (bullet.y * (panelSize.height - bulletSize)), bulletSize, bulletSize);
         }
+
+        //Cannon
+        g.setColor(cannonColor);
+        g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
     }
 
     @Override

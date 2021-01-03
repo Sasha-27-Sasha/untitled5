@@ -3,7 +3,7 @@ public class Bullet {
     double y;
     int type;
 
-    private static final double v = 0.01;
+    private static final double v = 0.025;
 
     public Bullet(double x, double y, int type) {
         this.x = x;
