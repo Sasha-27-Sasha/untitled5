@@ -4,9 +4,14 @@ import static java.lang.Math.*;
 public class Cannon {
 
     private double y = 0.5;
+    private final int reloadTime = 10;
+    private int reload = reloadTime;
+
     boolean up = false, down = false, jump = false;
 
     public void update() {
+        if (reload < reloadTime)//TODO: remove fps correlation
+            reload++;
         int direction = (up ? 1 : 0) - (down ? 1 : 0);
         if (jump) {
             if (direction != 0)
@@ -19,7 +24,10 @@ public class Cannon {
     }
 
     public void shoot(LinkedList<Bullet> bullets, int type) {
-        bullets.add(new Bullet(0, y, type));
+        if (reload == reloadTime) {
+            bullets.add(new Bullet(0, y, type));
+            reload = 0;
+        }
     }
 
     public double getPos() {
