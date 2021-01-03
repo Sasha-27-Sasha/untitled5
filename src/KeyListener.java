@@ -17,7 +17,13 @@ public class KeyListener extends KeyAdapter {
         int key = e.getKeyCode();
 
         if (KeyEvent.VK_7 <= key && key <= KeyEvent.VK_9) {
-            game.cannon.shoot(game.bullets, key - KeyEvent.VK_7);
+            boolean pressed = false;
+            for (boolean i : shoot)
+                pressed = pressed || i;
+
+            if (!pressed)
+                game.cannon.shoot(game.bullets, key - KeyEvent.VK_7);
+            shoot[key - KeyEvent.VK_7] = true;
         }
 
         if (key == KeyEvent.VK_SHIFT)
@@ -42,6 +48,9 @@ public class KeyListener extends KeyAdapter {
         super.keyReleased(e);
 
         int key = e.getKeyCode();
+
+        if (KeyEvent.VK_7 <= key && key <= KeyEvent.VK_9)
+            shoot[key - KeyEvent.VK_7] = false;
 
         if (key == KeyEvent.VK_SHIFT)
             game.cannon.jump = false;
