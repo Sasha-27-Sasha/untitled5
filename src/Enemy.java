@@ -5,8 +5,8 @@ public class Enemy {
     private double x = 1;
     private final double y;
     private final int type;
-    private double speed = 0.003;
-    private static final double acceleration = 0.001;
+    private double speed = 0.001;
+    private static final double acceleration = 0.002;
     private static final Random rnd = new Random();
 
     public Rectangle screenPos = new Rectangle(0, 0, 0, 0);

@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Game {
 
-    private static final int enemyRate = 70;
+    private static final int enemyRate = 90;
     private static final int enemyRateMaxDiff = 70;
     private int enemyReload = enemyRate;
     private int enemyRateDiff = 0;

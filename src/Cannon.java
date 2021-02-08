@@ -1,4 +1,6 @@
 import java.util.LinkedList;
+import java.util.Random;
+
 import static java.lang.Math.*;
 
 public class Cannon {
@@ -7,6 +9,9 @@ public class Cannon {
     private static final double speed = 0.015;
     private final int reloadTime = 10;
     private int reload = reloadTime;
+
+    private static final Random rnd = new Random();
+    private int bulletType = rnd.nextInt(3);
 
     boolean up = false, down = false, jump = false;
 
@@ -25,13 +30,18 @@ public class Cannon {
     }
 
     public void shoot(LinkedList<Bullet> bullets, int type) {
-        if (reload == reloadTime) {
-            bullets.add(new Bullet(0, y, type));
-            reload = 0;
+        if (reload == reloadTime && bulletType == type) {
+                bullets.add(new Bullet(0, y, bulletType));
+                bulletType = rnd.nextInt(3);
+                reload = 0;
         }
     }
 
     public double getPos() {
         return y;
+    }
+
+    public int getBulletType() {
+        return bulletType;
     }
 }

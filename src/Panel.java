@@ -26,7 +26,7 @@ public class Panel extends JPanel implements ActionListener {
 
         Color[] typeToColors = {Color.RED, Color.GREEN, Color.BLUE}; //TODO: remove count correlation
         //Cannon
-        Color cannonColor = Color.GREEN;
+        Color cannonColor = Color.CYAN;
         final int cannonX = 10;
         final int cannonSize = 80;
         //Bullets
@@ -51,6 +51,8 @@ public class Panel extends JPanel implements ActionListener {
         //Cannon
         g.setColor(cannonColor);
         g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
+        g.setColor(typeToColors[game.cannon.getBulletType()]);
+        g.fillOval(cannonX + 50, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 10, bulletSize, bulletSize);//TODO: remove constants
     }
 
     @Override
