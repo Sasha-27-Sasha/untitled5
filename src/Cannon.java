@@ -11,9 +11,15 @@ public class Cannon {
     private int reload = reloadTime;
 
     private static final Random rnd = new Random();
-    private int bulletType = rnd.nextInt(3);
+    private int bulletType;
+
+    public boolean isBonus = false; //TODO: public to private
 
     boolean up = false, down = false, jump = false;
+
+    public Cannon(int type) {
+        bulletType = type;
+    }
 
     public void update() {
         if (reload < reloadTime)//TODO: remove fps correlation
@@ -30,10 +36,10 @@ public class Cannon {
     }
 
     public void shoot(LinkedList<Bullet> bullets, int type, LinkedList<Enemy> enemies) {
-        if (reload == reloadTime && bulletType == type) {
+        if (reload == reloadTime && bulletType == type || isBonus) {
                 bullets.add(new Bullet(0, y, bulletType));
                 bulletType = rnd.nextInt(3);
-                while (!checkNewBullet(enemies))
+                while (!checkNewBullet(enemies) && enemies.size() != 0)
                     bulletType = (bulletType + 1) % 3;
                 reload = 0;
         }
