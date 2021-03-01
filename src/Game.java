@@ -7,6 +7,7 @@ public class Game {
     private static final int enemyRateMaxDiff = 70;
     private int enemyReload = enemyRate;
     private int enemyRateDiff = 0;
+    private int score = 0;
 
     private boolean is_run = true;
 
@@ -50,9 +51,14 @@ public class Game {
     private boolean collisionCheck(Bullet bullet) {
         for (Enemy enemy : enemies) {
             if (enemy.screenPos.intersects(bullet.screenPos)) {
-                if (enemy.getType() == bullet.getType())
+                if (enemy.getType() == bullet.getType()) {
                     enemies.remove(enemy);
-                //TODO: power up
+                    score++;
+                } else {
+                    score = 0;
+                }
+                System.out.println(score);
+
                 return true;
             }
         }
