@@ -29,12 +29,25 @@ public class Cannon {
         y = max(0.0, min(y, 1.0));
     }
 
-    public void shoot(LinkedList<Bullet> bullets, int type) {
+    public void shoot(LinkedList<Bullet> bullets, int type, LinkedList<Enemy> enemies) {
         if (reload == reloadTime && bulletType == type) {
                 bullets.add(new Bullet(0, y, bulletType));
                 bulletType = rnd.nextInt(3);
+                while (!checkNewBullet(enemies))
+                    bulletType = (bulletType + 1) % 3;
                 reload = 0;
         }
+    }
+
+    private boolean checkNewBullet(LinkedList<Enemy> enemies) {
+        boolean res = false;
+        for (Enemy enemy : enemies) {
+            if (enemy.getType() == bulletType) {
+                res = true;
+                break;
+            }
+        }
+        return res;
     }
 
     public double getPos() {

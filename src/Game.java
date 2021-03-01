@@ -16,6 +16,10 @@ public class Game {
     LinkedList<Bullet> bullets = new LinkedList<>();
     LinkedList<Enemy> enemies = new LinkedList<>();
 
+    public LinkedList<Enemy> getEnemies() {
+        return enemies;
+    }
+
     public void update() {
         if (!is_run)
             return;
