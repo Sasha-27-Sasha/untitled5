@@ -1,13 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class Panel extends JPanel implements ActionListener {
 
     private static final int timerDelay = 16;
     private final Game game;
 
-    private Image[] Balls = { new ImageIcon("res/redball.png").getImage(), new ImageIcon("res/greenball.png").getImage(), new ImageIcon("res/blueball.png").getImage()};
+    private static final Random rnd = new Random();
+
+    private final Image[] Balls = { new ImageIcon("res/redball.png").getImage(), new ImageIcon("res/greenball.png").getImage(), new ImageIcon("res/blueball.png").getImage()};
+    private final Image[] Enemies = {
+            new ImageIcon("res/enemy_r1.png").getImage(), new ImageIcon("res/enemy_r2.png").getImage(), new ImageIcon("res/enemy_r3.png").getImage(), new ImageIcon("res/enemy_r4.png").getImage(), new ImageIcon("res/enemy_r5.png").getImage(),
+            new ImageIcon("res/enemy_g1.png").getImage(), new ImageIcon("res/enemy_g2.png").getImage(), new ImageIcon("res/enemy_g3.png").getImage(), new ImageIcon("res/enemy_g4.png").getImage(), new ImageIcon("res/enemy_g5.png").getImage(),
+            new ImageIcon("res/enemy_b1.png").getImage(), new ImageIcon("res/enemy_b2.png").getImage(), new ImageIcon("res/enemy_b3.png").getImage(), new ImageIcon("res/enemy_b4.png").getImage(), new ImageIcon("res/enemy_b5.png").getImage()
+    };
 
     public Panel(Game game) {
         this.game = game;
@@ -38,7 +46,7 @@ public class Panel extends JPanel implements ActionListener {
         //Enemy
         for (Enemy enemy : game.enemies) {
             enemy.screenPos = new Rectangle((int) (enemy.getX() * (panelSize.width + enemySize)), (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize);
-            g.fillRoundRect(enemy.screenPos.x, enemy.screenPos.y, enemy.screenPos.width, enemy.screenPos.height, 10, 10);
+            g.drawImage(Enemies[enemy.getType() * 5 + enemy.getSubType()], enemy.screenPos.x, enemy.screenPos.y, null);
         }
 
         //Bullets
