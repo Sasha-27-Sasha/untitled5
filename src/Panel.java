@@ -7,6 +7,8 @@ public class Panel extends JPanel implements ActionListener {
     private static final int timerDelay = 16;
     private final Game game;
 
+    private Image[] Balls = { new ImageIcon("res/redball.png").getImage(), new ImageIcon("res/greenball.png").getImage(), new ImageIcon("res/blueball.png").getImage()};
+
     public Panel(Game game) {
         this.game = game;
         addKeyListener(new KeyListener(game));
@@ -24,7 +26,6 @@ public class Panel extends JPanel implements ActionListener {
         Graphics2D g = (Graphics2D) graphics;
         Rectangle panelSize = g.getClip().getBounds();
 
-        Color[] typeToColors = {Color.RED, Color.GREEN, Color.BLUE}; //TODO: remove count correlation
         //Cannon
         Color cannonColor = Color.CYAN;
         final int cannonX = 10;
@@ -36,23 +37,20 @@ public class Panel extends JPanel implements ActionListener {
 
         //Enemy
         for (Enemy enemy : game.enemies) {
-            g.setColor(typeToColors[enemy.getType()]);
             enemy.screenPos = new Rectangle((int) (enemy.getX() * (panelSize.width + enemySize)), (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize);
             g.fillRoundRect(enemy.screenPos.x, enemy.screenPos.y, enemy.screenPos.width, enemy.screenPos.height, 10, 10);
         }
 
         //Bullets
         for (Bullet bullet : game.bullets) {
-            g.setColor(typeToColors[bullet.getType()]);
             bullet.screenPos = new Rectangle((int) (bullet.getX() * panelSize.width) + cannonX, (int) (bullet.getY() * (panelSize.height - bulletSize)), bulletSize, bulletSize);
-            g.fillOval(bullet.screenPos.x, bullet.screenPos.y, bullet.screenPos.width, bullet.screenPos.height);
+            g.drawImage(Balls[game.cannon.getBulletType()], bullet.screenPos.x, bullet.screenPos.y, null);
         }
 
         //Cannon
         g.setColor(cannonColor);
         g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
-        g.setColor(typeToColors[game.cannon.getBulletType()]);
-        g.fillOval(cannonX + 50, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 10, bulletSize, bulletSize);//TODO: remove constants
+        g.drawImage(Balls[game.cannon.getBulletType()], cannonX + 50, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 10, null);
     }
 
     @Override
