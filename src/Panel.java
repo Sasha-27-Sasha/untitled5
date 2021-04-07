@@ -16,6 +16,7 @@ public class Panel extends JPanel implements ActionListener {
             new ImageIcon("res/enemy_g1.png").getImage(), new ImageIcon("res/enemy_g2.png").getImage(), new ImageIcon("res/enemy_g3.png").getImage(), new ImageIcon("res/enemy_g4.png").getImage(), new ImageIcon("res/enemy_g5.png").getImage(),
             new ImageIcon("res/enemy_b1.png").getImage(), new ImageIcon("res/enemy_b2.png").getImage(), new ImageIcon("res/enemy_b3.png").getImage(), new ImageIcon("res/enemy_b4.png").getImage(), new ImageIcon("res/enemy_b5.png").getImage()
     };
+    private final Image bg = new ImageIcon("res/bg.png").getImage();
 
     public Panel(Game game) {
         this.game = game;
@@ -42,6 +43,8 @@ public class Panel extends JPanel implements ActionListener {
         final int bulletSize = 60;
         //Enemy
         final int enemySize = 60;
+
+        g.drawImage(bg, 0, 0, null);
 
         //Enemy
         for (Enemy enemy : game.enemies) {
