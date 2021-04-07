@@ -52,7 +52,7 @@ public class Panel extends JPanel implements ActionListener {
         //Bullets
         for (Bullet bullet : game.bullets) {
             bullet.screenPos = new Rectangle((int) (bullet.getX() * panelSize.width) + cannonX, (int) (bullet.getY() * (panelSize.height - bulletSize)), bulletSize, bulletSize);
-            g.drawImage(Balls[game.cannon.getBulletType()], bullet.screenPos.x, bullet.screenPos.y, null);
+            g.drawImage(Balls[bullet.getType()], bullet.screenPos.x, bullet.screenPos.y, null);
         }
 
         //Cannon

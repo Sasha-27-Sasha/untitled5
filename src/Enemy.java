@@ -17,10 +17,6 @@ public class Enemy {
         subType = rnd.nextInt(5);
     }
 
-    public int getSubType() {
-        return subType;
-    }
-
     public void speedUp() {
         speed += acceleration;
     }
@@ -32,6 +28,10 @@ public class Enemy {
 
     public int getType() {
         return type;
+    }
+
+    public int getSubType() {
+        return subType;
     }
 
     public double getX() {
