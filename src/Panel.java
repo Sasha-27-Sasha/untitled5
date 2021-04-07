@@ -17,6 +17,7 @@ public class Panel extends JPanel implements ActionListener {
             new ImageIcon("res/enemy_b1.png").getImage(), new ImageIcon("res/enemy_b2.png").getImage(), new ImageIcon("res/enemy_b3.png").getImage(), new ImageIcon("res/enemy_b4.png").getImage(), new ImageIcon("res/enemy_b5.png").getImage()
     };
     private final Image bg = new ImageIcon("res/bg.png").getImage();
+    private final Image cannonImage = new ImageIcon("res/cannon.png").getImage();
 
     public Panel(Game game) {
         this.game = game;
@@ -38,9 +39,9 @@ public class Panel extends JPanel implements ActionListener {
         //Cannon
         Color cannonColor = Color.CYAN;
         final int cannonX = 10;
-        final int cannonSize = 80;
+        final int cannonSize = 100;
         //Bullets
-        final int bulletSize = 60;
+        final int bulletSize = 40;
         //Enemy
         final int enemySize = 60;
 
@@ -54,14 +55,15 @@ public class Panel extends JPanel implements ActionListener {
 
         //Bullets
         for (Bullet bullet : game.bullets) {
-            bullet.screenPos = new Rectangle((int) (bullet.getX() * panelSize.width) + cannonX, (int) (bullet.getY() * (panelSize.height - bulletSize)), bulletSize, bulletSize);
+            bullet.screenPos = new Rectangle((int) (bullet.getX() * panelSize.width) + cannonX + 50, (int) (bullet.getY() * (panelSize.height - bulletSize - 55)) + 25, bulletSize, bulletSize);
             g.drawImage(Balls[bullet.getType()], bullet.screenPos.x, bullet.screenPos.y, null);
         }
-
         //Cannon
         g.setColor(cannonColor);
-        g.fillRect(cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), cannonSize, cannonSize);
-        g.drawImage(Balls[game.cannon.getBulletType()], cannonX + 50, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 10, null);
+        g.drawImage(Balls[game.cannon.getBulletType()], cannonX + 78, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 28, null);
+        g.drawImage(cannonImage, cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), null);
+
+
     }
 
     @Override
