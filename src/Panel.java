@@ -18,6 +18,7 @@ public class Panel extends JPanel implements ActionListener {
     };
     private final Image bg = new ImageIcon("res/bg.png").getImage();
     private final Image cannonImage = new ImageIcon("res/cannon.png").getImage();
+    private final Image gameOver = new ImageIcon("res/gg.png").getImage();
 
     public Panel(Game game) {
         this.game = game;
@@ -63,7 +64,9 @@ public class Panel extends JPanel implements ActionListener {
         g.drawImage(Balls[game.cannon.getBulletType()], cannonX + 78, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)) + 28, null);
         g.drawImage(cannonImage, cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), null);
 
-
+        //GameOver
+        if (!game.Is_run())
+            g.drawImage(gameOver, 300, 400, null);
     }
 
     @Override

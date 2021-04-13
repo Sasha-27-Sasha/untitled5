@@ -91,6 +91,10 @@ public class Game {
         return false;
     }
 
+    public boolean Is_run() {
+        return is_run;
+    }
+
     private static void clearConsole() //TODO: Don't work on linux from Intellij
     {
         try
