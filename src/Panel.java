@@ -67,6 +67,12 @@ public class Panel extends JPanel implements ActionListener {
         //GameOver
         if (!game.Is_run())
             g.drawImage(gameOver, 300, 400, null);
+
+        //Score
+        g.setFont(new Font(null, Font.BOLD, 40));
+        g.setColor(Color.black);
+        g.drawString("Score: " + game.getScore(), 900, 50);
+        g.drawString("Best score: " + game.getBestScore(), 800, 950);
     }
 
     @Override

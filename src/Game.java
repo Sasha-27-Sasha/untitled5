@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Random;
+import java.io.*;
 
 public class Game {
 
@@ -7,7 +8,7 @@ public class Game {
     private static final int enemyRateMaxDiff = 70;
     private int enemyReload = 0;
     private int enemyRateDiff = 0;
-    private int rowScore = 0, score = 0, bonusReload = 0;
+    private int rowScore = 0, score = 0, bonusReload = 0, bestScore;
     private boolean isBonus = false;
 
     private boolean is_run = true;
@@ -21,6 +22,18 @@ public class Game {
     public Game() {
         enemies.add(new Enemy());
         cannon = new Cannon(enemies.getFirst().getType());
+        File file = new File("score.txt");
+        try {
+            if (file.createNewFile()) {
+                    FileWriter fw = new FileWriter(file, false);
+                    PrintWriter pw = new PrintWriter(fw, true);
+                    pw.println(0);
+            }
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            bestScore = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public LinkedList<Enemy> getEnemies() {
@@ -48,6 +61,16 @@ public class Game {
         for (Enemy enemy : enemies) {
             if (!enemy.move()) {
                 is_run = false;
+                File file = new File("score.txt");
+                FileWriter fw = null;
+                try {
+                    fw = new FileWriter(file, false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    break;
+                }
+                PrintWriter pw = new PrintWriter(fw, true);
+                pw.println(bestScore);
                 break;
             }
         }
@@ -69,6 +92,8 @@ public class Game {
                     enemies.remove(enemy);
                     rowScore++;
                     score++;
+                    if (score > bestScore)
+                        bestScore = score;
                     if (!isBonus) {
                         bonusReload++;
                         if (bonusReload == 5) {//TODO: remove number
@@ -79,35 +104,21 @@ public class Game {
                 } else {
                     rowScore = 0;
                 }
-                System.out.print("Score in a row: ");
-                System.out.println(rowScore);
-                System.out.print("Score: ");
-                System.out.println(score);
-                clearConsole();
-
                 return true;
             }
         }
         return false;
     }
 
-    public boolean Is_run() {
-        return is_run;
+    public int getScore() {
+        return score;
     }
 
-    private static void clearConsole() //TODO: Don't work on linux from Intellij
-    {
-        try
-        {
-            final String os = System.getProperty("os.name");
+    public int getBestScore() {
+        return bestScore;
+    }
 
-            if (os.contains("Windows"))
-                Runtime.getRuntime().exec("cls");
-            else
-                Runtime.getRuntime().exec("clear");
-        }
-        catch (final Exception e) {
-            System.out.println("Use normal OS");
-        }
+    public boolean Is_run() {
+        return is_run;
     }
 }
