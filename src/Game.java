@@ -118,6 +118,10 @@ public class Game {
         return bestScore;
     }
 
+    public boolean isBonus() {
+        return isBonus;
+    }
+
     public boolean Is_run() {
         return is_run;
     }

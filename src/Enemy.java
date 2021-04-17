@@ -14,7 +14,7 @@ public class Enemy {
     public Enemy() {
         y = rnd.nextDouble();
         type = rnd.nextInt(3);
-        subType = rnd.nextInt(5);
+        subType = 0;//rnd.nextInt(5);
     }
 
     public void speedUp() {

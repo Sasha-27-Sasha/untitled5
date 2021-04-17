@@ -11,11 +11,12 @@ public class Panel extends JPanel implements ActionListener {
     private static final Random rnd = new Random();
 
     private final Image[] Balls = { new ImageIcon("res/redball.png").getImage(), new ImageIcon("res/greenball.png").getImage(), new ImageIcon("res/blueball.png").getImage()};
-    private final Image[] Enemies = {
-            new ImageIcon("res/enemy_r1.png").getImage(), new ImageIcon("res/enemy_r2.png").getImage(), new ImageIcon("res/enemy_r3.png").getImage(), new ImageIcon("res/enemy_r4.png").getImage(), new ImageIcon("res/enemy_r5.png").getImage(),
-            new ImageIcon("res/enemy_g1.png").getImage(), new ImageIcon("res/enemy_g2.png").getImage(), new ImageIcon("res/enemy_g3.png").getImage(), new ImageIcon("res/enemy_g4.png").getImage(), new ImageIcon("res/enemy_g5.png").getImage(),
-            new ImageIcon("res/enemy_b1.png").getImage(), new ImageIcon("res/enemy_b2.png").getImage(), new ImageIcon("res/enemy_b3.png").getImage(), new ImageIcon("res/enemy_b4.png").getImage(), new ImageIcon("res/enemy_b5.png").getImage()
-    };
+//    private final Image[] Enemies = {
+//            new ImageIcon("res/enemy_r1.png").getImage(), new ImageIcon("res/enemy_r2.png").getImage(), new ImageIcon("res/enemy_r3.png").getImage(), new ImageIcon("res/enemy_r4.png").getImage(), new ImageIcon("res/enemy_r5.png").getImage(),
+//            new ImageIcon("res/enemy_g1.png").getImage(), new ImageIcon("res/enemy_g2.png").getImage(), new ImageIcon("res/enemy_g3.png").getImage(), new ImageIcon("res/enemy_g4.png").getImage(), new ImageIcon("res/enemy_g5.png").getImage(),
+//            new ImageIcon("res/enemy_b1.png").getImage(), new ImageIcon("res/enemy_b2.png").getImage(), new ImageIcon("res/enemy_b3.png").getImage(), new ImageIcon("res/enemy_b4.png").getImage(), new ImageIcon("res/enemy_b5.png").getImage()
+//    };
+    private final Image[] Enemies = { new ImageIcon("res/red.png").getImage(), new ImageIcon("res/green.png").getImage(), new ImageIcon("res/blue.png").getImage()};
     private final Image bg = new ImageIcon("res/bg.png").getImage();
     private final Image cannonImage = new ImageIcon("res/cannon.png").getImage();
     private final Image gameOver = new ImageIcon("res/gg.png").getImage();
@@ -51,7 +52,7 @@ public class Panel extends JPanel implements ActionListener {
         //Enemy
         for (Enemy enemy : game.enemies) {
             enemy.screenPos = new Rectangle((int) (enemy.getX() * (panelSize.width + enemySize)), (int) (enemy.getY() * (panelSize.height - enemySize)), enemySize, enemySize);
-            g.drawImage(Enemies[enemy.getType() * 5 + enemy.getSubType()], enemy.screenPos.x, enemy.screenPos.y, null);
+            g.drawImage(Enemies[enemy.getType() + enemy.getSubType()], enemy.screenPos.x, enemy.screenPos.y, null);
         }
 
         //Bullets
@@ -73,7 +74,20 @@ public class Panel extends JPanel implements ActionListener {
         g.setColor(Color.black);
         g.drawString("Score: " + game.getScore(), 900, 50);
         g.drawString("Best score: " + game.getBestScore(), 800, 950);
+
+        if (game.isBonus()) {
+            bonusFrames++;
+            if (bonusFrames > 80)
+                return;
+            g.setColor(new Color(bonusFrames * 3, bonusFrames, bonusFrames * 2));
+            g.drawString("You got bonus!", 400, 400);
+        }
+        else {
+            bonusFrames = 0;
+        }
     }
+
+    private int bonusFrames = 0;
 
     @Override
     public void actionPerformed(ActionEvent e) {
