@@ -20,11 +20,41 @@ public class Panel extends JPanel implements ActionListener {
     private final Image bg = new ImageIcon("res/bg.png").getImage();
     private final Image cannonImage = new ImageIcon("res/cannon.png").getImage();
     private final Image gameOver = new ImageIcon("res/gg.png").getImage();
+    private final Image menuBg = new ImageIcon("res/menubg.jpeg").getImage();
+
+    private final JButton playB, exitB, menuB;
+    private boolean isMenu = true;
 
     public Panel(Game game) {
         this.game = game;
         addKeyListener(new KeyListener(game));
         setFocusable(true);
+        setLayout(null);
+        playB = new JButton("Play");
+        playB.setBackground(new Color(30, 240, 60));
+        playB.setBounds(150, 400, 400, 150);
+        playB.setFocusable(false);
+        playB.setActionCommand("Play");
+        playB.setFont(new Font(null, Font.BOLD, 40));
+        playB.addActionListener(this);
+        add(playB);
+        menuB = new JButton("Menu");
+        menuB.setBackground(Color.CYAN);
+        menuB.setBounds(400, 550, 400, 150);
+        menuB.setFocusable(false);
+        menuB.setActionCommand("Menu");
+        menuB.setFont(new Font(null, Font.BOLD, 40));
+        menuB.addActionListener(this);
+        menuB.setVisible(false);
+        add(menuB);
+        exitB = new JButton("Exit");
+        exitB.setBackground(new Color(200, 30, 50));
+        exitB.setBounds(650, 400, 400, 150);
+        exitB.setFocusable(false);
+        exitB.setFont(new Font(null, Font.BOLD, 40));
+        exitB.setActionCommand("Exit");
+        exitB.addActionListener(this);
+        add(exitB);
         Timer timer = new Timer(timerDelay, this);
         timer.start();
         //TODO: window decoration
@@ -37,6 +67,11 @@ public class Panel extends JPanel implements ActionListener {
 
         Graphics2D g = (Graphics2D) graphics;
         Rectangle panelSize = g.getClip().getBounds();
+
+        if (isMenu) {
+            g.drawImage(menuBg, 0, 0, null);
+            return;
+        }
 
         //Cannon
         Color cannonColor = Color.CYAN;
@@ -66,7 +101,7 @@ public class Panel extends JPanel implements ActionListener {
         g.drawImage(cannonImage, cannonX, (int) (game.cannon.getPos() * (panelSize.height - cannonSize)), null);
 
         //GameOver
-        if (!game.Is_run())
+        if (!game.isRun())
             g.drawImage(gameOver, 300, 400, null);
 
         //Score
@@ -91,7 +126,25 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        game.update();
+        if ("Play".equals(e.getActionCommand())) {
+            game.restart();
+            playB.setVisible(false);
+            exitB.setVisible(false);
+            isMenu = false;
+        }
+        if ("Exit".equals(e.getActionCommand()))
+            System.exit(0);
+        if ("Menu".equals(e.getActionCommand())) {
+            menuB.setVisible(false);
+            isMenu = true;
+            playB.setVisible(true);
+            exitB.setVisible(true);
+        }
+        if (!isMenu)
+            game.update();
+        if (!game.isRun() && !isMenu) {
+            menuB.setVisible(true);
+        }
         repaint();
     }
 }

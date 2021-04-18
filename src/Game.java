@@ -11,7 +11,7 @@ public class Game {
     private int rowScore = 0, score = 0, bonusReload = 0, bestScore;
     private boolean isBonus = false;
 
-    private boolean is_run = true;
+    private boolean isRun = true;
 
     private static final Random rnd = new Random();
 
@@ -40,8 +40,17 @@ public class Game {
         return enemies;
     }
 
+    public void restart() {
+        isBonus = false;
+        isRun = true;
+        rowScore = score = bonusReload = enemyReload = enemyRateDiff = 0;
+        enemies.clear();
+        enemies.add(new Enemy());
+        cannon.restart(enemies.getFirst().getType());
+    }
+
     public void update() {
-        if (!is_run)
+        if (!isRun)
             return;
         if (isBonus)
         {
@@ -60,7 +69,7 @@ public class Game {
         }
         for (Enemy enemy : enemies) {
             if (!enemy.move()) {
-                is_run = false;
+                isRun = false;
                 File file = new File("score.txt");
                 FileWriter fw = null;
                 try {
@@ -122,7 +131,7 @@ public class Game {
         return isBonus;
     }
 
-    public boolean Is_run() {
-        return is_run;
+    public boolean isRun() {
+        return isRun;
     }
 }

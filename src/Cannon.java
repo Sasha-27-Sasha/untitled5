@@ -21,6 +21,13 @@ public class Cannon {
         bulletType = type;
     }
 
+    public void restart(int type) {
+        up = down = jump = false;
+        bulletType = type;
+        y = 0.5;
+        reload = reloadTime;
+    }
+
     public void update() {
         if (reload < reloadTime)//TODO: remove fps correlation
             reload++;
