@@ -4,9 +4,9 @@ import java.awt.*;
 public class Enemy {
     private double x = 1;
     private final double y;
-    private final int type;
-    private double speed = 0.003;
-    private static final double acceleration = 0.001;
+    private final int type, subType;
+    private double speed = 0.001;
+    private static final double acceleration = 0.002;
     private static final Random rnd = new Random();
 
     public Rectangle screenPos = new Rectangle(0, 0, 0, 0);
@@ -14,6 +14,7 @@ public class Enemy {
     public Enemy() {
         y = rnd.nextDouble();
         type = rnd.nextInt(3);
+        subType = 0;//rnd.nextInt(5);
     }
 
     public void speedUp() {
@@ -27,6 +28,10 @@ public class Enemy {
 
     public int getType() {
         return type;
+    }
+
+    public int getSubType() {
+        return subType;
     }
 
     public double getX() {

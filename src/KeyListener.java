@@ -22,7 +22,7 @@ public class KeyListener extends KeyAdapter {
                 pressed = pressed || i;
 
             if (!pressed)
-                game.cannon.shoot(game.bullets, key - KeyEvent.VK_7);
+                game.cannon.shoot(game.bullets, key - KeyEvent.VK_7, game.getEnemies());
             shoot[key - KeyEvent.VK_7] = true;
         }
 
